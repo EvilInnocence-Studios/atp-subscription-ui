@@ -1,16 +1,15 @@
-import { config } from "@config";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { hasPermission } from "@uac/components/HasPermission";
 import { LoggedIn } from "@uac/components/LoggedIn";
 import { LoginForm } from "@uac/components/LoginForm";
 import { Alert, Button } from "antd";
 import clsx from "clsx";
+import { SignUpFormProps } from "./SignUpForm.d";
 import styles from './SignUpForm.module.scss';
-import { SignUpFormProps } from  "./SignUpForm.d";
 
 const IsSubscribed = hasPermission("product.subscription");
 
-export const SignUpFormComponent = ({selectedOption, setSelectedOption, createSubscription, onApprove}:SignUpFormProps) => <>
+export const SignUpFormComponent = ({selectedOption, setSelectedOption, createSubscription, onApprove, plans}:SignUpFormProps) => <>
     <LoggedIn yes>
         <IsSubscribed yes>
             <div className={styles.subscribedAlert}>
@@ -21,7 +20,7 @@ export const SignUpFormComponent = ({selectedOption, setSelectedOption, createSu
             <div className={styles.subscriptionOptions}>
                 <h2>Choose your plan to subscribe</h2>
                 <div className={styles.optionList}>
-                    {config().paypal.plans.map((option, i) =>
+                    {plans.map((option, i) =>
                         <div key={i} className={styles.subscriptionOption}>
                             <div className={clsx([styles.optionDetails, (selectedOption === i) && styles.selected])} onClick={() => setSelectedOption(i)}>
                                 <Button type={selectedOption === i ? "primary" : "default"}>
@@ -30,7 +29,7 @@ export const SignUpFormComponent = ({selectedOption, setSelectedOption, createSu
                                 <p>
                                     Renews every {option.renews}
                                     {i > 0 && <><br/>
-                                        Saves {Math.round((1 - (option.price / option.period) / config().paypal.plans[0].price) * 100)}%
+                                        Saves {Math.round((1 - (option.price / option.period) / plans[0].price) * 100)}%
                                     </>}
                                 </p>
                             </div>

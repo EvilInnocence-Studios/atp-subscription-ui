@@ -7,6 +7,7 @@ export declare interface ISignUpFormProps {
     userId: string;
     createSubscription: (plan:ISubscriptionPlan) => PayPalButtonCreateSubscription;
     onApprove: (data: any, actions:any) => Promise<void>;
+    plans: ISubscriptionPlan[];
 }
 
 // What gets passed into the component from the parent as attributes

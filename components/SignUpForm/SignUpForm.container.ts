@@ -6,6 +6,7 @@ import { useLoggedInUser } from "@uac/lib/login/services";
 import { services } from "@core/lib/api";
 import { all } from "ts-functional";
 import { flash } from "@core/lib/flash";
+import { localConfig } from "../../../config.local";
 
 const injectSignUpFormProps = createInjector(({}:ISignUpFormInputProps):ISignUpFormProps => {
     const [selectedOption, setSelectedOption] = useState<number>(0);
@@ -24,7 +25,9 @@ const injectSignUpFormProps = createInjector(({}:ISignUpFormInputProps):ISignUpF
             .then(all(flash.success("Subscription created"), refresh));
     }
 
-    return {selectedOption, setSelectedOption, userId: user.user.id, createSubscription, onApprove};
+    const plans = localConfig.paypal.plans;
+
+    return {selectedOption, setSelectedOption, userId: user.user.id, createSubscription, onApprove, plans};
 });
 
 const connect = inject<ISignUpFormInputProps, SignUpFormProps>(mergeProps(
