@@ -10,12 +10,19 @@ const injectPlanManagerProps = createInjector(({}:IPlanManagerInputProps):IPlanM
     const [plans, setPlans] = useState<ISubscriptionPlan[]>([]);
     const loader = useLoaderAsync();
 
-    useEffect(() => {
+    const refresh = () => {
         loader(() => services().subscription.plans.search().then(setPlans));
-    }, []);
+    }
 
+    useEffect(refresh, []);
+
+    const addPlan = () => {
+        loader(() => services().subscription.plans.create({}).then((plan) => {
+            setPlans((prevPlans) => [...prevPlans, plan]);
+        }));
+    };
     
-    return {plans, isLoading: loader.isLoading};
+    return {plans, isLoading: loader.isLoading, addPlan, refresh};
 });
 
 const connect = inject<IPlanManagerInputProps, PlanManagerProps>(mergeProps(

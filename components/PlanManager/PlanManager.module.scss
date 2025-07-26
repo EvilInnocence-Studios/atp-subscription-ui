@@ -1,1 +1,10 @@
 @use "@styles/globals.module.scss";
+
+.planManager {
+    .planList {
+        margin-top: globals.$padding;
+        > * {
+            margin-top: globals.$padding;
+        }
+    }
+}

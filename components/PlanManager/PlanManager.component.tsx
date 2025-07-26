@@ -1,19 +1,26 @@
-import { Spin } from "antd";
-import {PlanManagerProps} from "./PlanManager.d";
-import styles from './PlanManager.module.scss';
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Col, Row, Spin } from "antd";
 import { PlanEditor } from "../PlanEditor";
+import { PlanManagerProps } from "./PlanManager.d";
+import styles from './PlanManager.module.scss';
 
-export const PlanManagerComponent = ({plans, isLoading}:PlanManagerProps) =>
+export const PlanManagerComponent = ({plans, isLoading, addPlan, refresh}:PlanManagerProps) =>
     <Spin spinning={isLoading} tip="Loading subscription plans...">
         <div className={styles.planManager}>
             <h1>Subscription Plans</h1>
 
-            <ul className={styles.planList}>
+            <Button type="primary" className={styles.addPlanButton} onClick={addPlan}>
+                <FontAwesomeIcon icon={faPlus} />
+                Add New Plan
+            </Button>
+
+            <Row gutter={16} className={styles.planList}>
                 {plans.map(plan => (
-                    <li key={plan.id} className={styles.planItem}>
-                        <PlanEditor defaultPlan={plan} />
-                    </li>
+                    <Col key={plan.id} xs={6} className={styles.planItem}>
+                        <PlanEditor defaultPlan={plan} refresh={refresh} />
+                    </Col>
                 ))}
-            </ul>
+            </Row>
         </div>
     </Spin>;

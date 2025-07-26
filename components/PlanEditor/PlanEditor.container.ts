@@ -4,8 +4,9 @@ import {IPlanEditorInputProps, PlanEditorProps, IPlanEditorProps} from "./PlanEd
 import { useUpdater } from "@core/lib/useUpdater";
 import { ISubscriptionPlan } from "@subscription-shared/types";
 import { services } from "@core/lib/api";
+import { flash } from "@core/lib/flash";
 
-const injectPlanEditorProps = createInjector(({defaultPlan}:IPlanEditorInputProps):IPlanEditorProps => {
+const injectPlanEditorProps = createInjector(({defaultPlan, refresh}:IPlanEditorInputProps):IPlanEditorProps => {
     const updater = useUpdater<ISubscriptionPlan>(
         "plan",
         defaultPlan.id,
@@ -14,8 +15,19 @@ const injectPlanEditorProps = createInjector(({defaultPlan}:IPlanEditorInputProp
         services().subscription.plans.update,
         "manual"
     );
+
+    const remove = () => {
+        services().subscription.plans.remove(updater.history.entity.id)
+            .then(() => {
+                flash.success("Plan removed")();
+                refresh();
+            }
+        ).catch(() => {
+            flash.error("Failed to remove plan")();
+        });
+    }
     
-    return {plan: updater.history.entity, ...updater};
+    return {plan: updater.history.entity, ...updater, remove};
 });
 
 const connect = inject<IPlanEditorInputProps, PlanEditorProps>(mergeProps(
