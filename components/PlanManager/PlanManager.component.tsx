@@ -4,11 +4,13 @@ import { Button, Col, Row, Spin } from "antd";
 import { PlanEditor } from "../PlanEditor";
 import { PlanManagerProps } from "./PlanManager.d";
 import styles from './PlanManager.module.scss';
+import { ClearCacheButton } from "@common/components/ClearCacheButton";
 
 export const PlanManagerComponent = ({plans, isLoading, addPlan, refresh}:PlanManagerProps) =>
     <Spin spinning={isLoading} tip="Loading subscription plans...">
         <div className={styles.planManager}>
-            <h1>Subscription Plans</h1>
+            <h1>Subscription Plans <ClearCacheButton entity="subscription plan" cacheType="subscriptionPlans" /></h1>
+            
 
             <Button type="primary" className={styles.addPlanButton} onClick={addPlan}>
                 <FontAwesomeIcon icon={faPlus} />
