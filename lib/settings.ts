@@ -9,7 +9,7 @@ export const subscriptionSettings:ISettingContainer = {
                 defaultValue: "My Subscription",
                 description: "The name of the subscription as it appears in emails and other communications.",
             },
-            subscripttionInfoUrl: {
+            subscriptionInfoUrl: {
                 displayName: "Subscription Info URL",
                 type: "string",
                 defaultValue: "",
