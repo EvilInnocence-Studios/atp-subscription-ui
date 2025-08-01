@@ -1,6 +1,7 @@
 import { SafeUser } from "@uac-shared/user/types";
 
 export declare interface ISubscriptionEditorProps {
+    name: string;
     cancel: () => Promise<void>;
 }
 
