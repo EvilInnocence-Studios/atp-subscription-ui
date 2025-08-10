@@ -1,4 +1,6 @@
 import { ISettingContainer } from "@common/lib/setting/types";
+import { services } from "@core/lib/api";
+import { map } from "ts-functional";
 
 export const subscriptionSettings:ISettingContainer = {
     "Subscription": {
@@ -17,4 +19,15 @@ export const subscriptionSettings:ISettingContainer = {
             }
         },
     },
+    UAC: {
+        Roles: {
+            subscriptionRole: {
+                displayName: "Subscription Role",
+                type: "select",
+                defaultValue: "subscriber",
+                description: "The role assigned to users who subscribe.",
+                options: () => services().role.search({}).then(map(role => ({ value: role.id, label: role.name }))),
+            }
+        }
+    }
 };
