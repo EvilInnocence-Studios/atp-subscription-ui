@@ -18,7 +18,7 @@ export const SignUpFormComponent = ({selectedOption, setSelectedOption, createSu
         </IsSubscribed>
         <IsSubscribed no>
             <div className={styles.subscriptionOptions}>
-                <h2>Choose your plan to subscribe</h2>
+                <h2>Choose your plan</h2>
                 <div className={styles.optionList}>
                     {plans.map((option, i) =>
                         <div key={i} className={styles.subscriptionOption}>

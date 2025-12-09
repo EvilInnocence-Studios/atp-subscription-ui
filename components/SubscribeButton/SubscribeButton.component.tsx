@@ -1,6 +1,6 @@
 import { faArrowRight, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Modal } from "antd";
+import { Button, Modal, Alert } from "antd";
 import clsx from "clsx";
 import { SubscribeButtonProps } from "./SubscribeButton.d";
 import styles from './SubscribeButton.module.scss';
@@ -18,6 +18,14 @@ export const SubscribeButtonComponent = ({className, modal, subscriptionName, in
             onCancel={modal.close}
             footer={<Link to={infoUrl || ""}>Learn more <FontAwesomeIcon icon={faArrowRight} /></Link>}
     >
+        <Alert className={styles.info} message={
+            <>
+                <b>BSP</b> products are <b>FREE</b> but only available to <b>Backstage Pass Subscribers</b>.  Subscribe to a monthly plan to get instant access to this and over 900 other products at no extra cost.  New products are released each month.
+                <div style={{textAlign: "right"}}>
+                    <Link to={infoUrl || ""}>Learn more <FontAwesomeIcon icon={faArrowRight} /></Link>
+                </div>
+            </>
+        } type="info" />
         <SignUpForm />
     </Modal>
 </>;
