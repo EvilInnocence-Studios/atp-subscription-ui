@@ -2,7 +2,7 @@
  
 .subscribedAlert { 
     max-width: 512px; 
-    margin: globals.$padding auto; 
+    margin: var(--padding) auto; 
     text-align: center; 
 } 
  
@@ -24,21 +24,21 @@
         .subscriptionOption { 
             flex-grow: 1; 
             display: inline-block; 
-            padding: globals.$padding; 
+            padding: var(--padding); 
             text-align: center; 
             min-height: 380px; 
             @media (max-width: 730px) { 
                 width: 100%; 
             } 
             .optionDetails { 
-                border: solid 4px globals.$brand-border; 
-                border-radius: globals.$border-radius-lg; 
-                padding: globals.$padding; 
-                margin-bottom: globals.$padding; 
+                border: solid 4px var(--brandBorder); 
+                border-radius: var(--borderRadius); 
+                padding: var(--padding); 
+                margin-bottom: var(--padding); 
                 height: 128px; 
                 &.selected { 
-                    border: solid 4px globals.$brand-primary; 
-                    background-color: globals.$brand-bg-light; 
+                    border: solid 4px var(--brandPrimary); 
+                    background-color: var(--brandBgLight); 
                 } 
                 button { 
                     width: 100%; 
@@ -49,7 +49,7 @@
 } 
  
 .loginForm { 
-    max-width: globals.$cms-width; 
+    max-width: var(--cmsWidth); 
     margin: auto; 
     padding: 128px; 
     h2 { 
